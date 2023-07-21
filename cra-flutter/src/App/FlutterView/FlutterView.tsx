@@ -48,6 +48,7 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
   }
 
   useEffect(() => {
+    const target = ref.current
     let isRendered = true
     const initFlutterApp = async () => {
       const engineInitializer = await new Promise<any>((resolve) => {
@@ -61,7 +62,7 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
 
       console.log('initialize Flutter engine...')
       const appRunner = await engineInitializer?.initializeEngine({
-        hostElement: ref.current,
+        hostElement: target,
         assetBase: assetBase,
       })
       if (!isRendered) return
@@ -76,14 +77,15 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
       onFlutterAppLoaded(state)
     }
 
-    ref.current?.addEventListener('flutter-initialized', eventListener, {
+    target?.addEventListener('flutter-initialized', eventListener, {
       once: true,
     })
 
     return () => {
       isRendered = false
-      ref.current?.removeEventListener('flutter-initialized', eventListener)
+      target?.removeEventListener('flutter-initialized', eventListener)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
