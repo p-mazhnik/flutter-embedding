@@ -30,7 +30,7 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
   onTextChange,
   text,
   screen,
-  clicks= 3,
+  clicks,
 }) => {
   const flutterState = useRef<any>(null)
   const ref = useRef<HTMLDivElement>(null)
@@ -38,9 +38,9 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
   const onFlutterAppLoaded = (state: any) => {
     flutterState.current = state
     // listen to state changes
-    state.onClicksChanged(() => { onClicksChange?.(flutterState.current?.getClicks()) })
-    state.onTextChanged(() => { onTextChange?.(flutterState.current?.getText()) })
-    state.onScreenChanged(() => { onScreenChange?.(flutterState.current?.getScreen()) })
+    state.onClicksChanged(onClicksChange)
+    state.onTextChanged(onTextChange)
+    state.onScreenChanged(onScreenChange)
     // set initial values
     flutterState.current?.setText(text)
     flutterState.current?.setScreen(screen)

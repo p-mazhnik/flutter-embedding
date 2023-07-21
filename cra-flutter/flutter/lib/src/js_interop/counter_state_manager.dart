@@ -68,15 +68,21 @@ class DemoAppStateManager {
   }
 
   // Allows clients to subscribe to changes to the wrapped value.
-  void onClicksChanged(VoidCallback f) {
-    _counter.addListener(f);
+  void onClicksChanged(Function(int) f) {
+    _counter.addListener(() {
+      f(getClicks());
+    });
   }
 
-  void onTextChanged(VoidCallback f) {
-    _text.addListener(f);
+  void onTextChanged(Function(String) f) {
+    _text.addListener(() {
+      f(getText());
+    });
   }
 
-  void onScreenChanged(VoidCallback f) {
-    _screen.addListener(f);
+  void onScreenChanged(Function(String) f) {
+    _screen.addListener(() {
+      f(getScreen());
+    });
   }
 }
