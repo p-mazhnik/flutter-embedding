@@ -4,7 +4,7 @@
   "scripts": {
     "prestart": "rimraf node_modules/.cache/",
     "start": "react-scripts start",
-    "prebuild": "pushd flutter && flutter clean && flutter build web --output=../public/flutter && popd",
+    "prebuild": "cd flutter && flutter clean && flutter build web --output=../public/flutter && cd -",
     "build": "react-scripts build",
     "test": "react-scripts test"
   },
