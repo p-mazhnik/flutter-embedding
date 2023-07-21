@@ -1,6 +1,6 @@
 {
-    "name": "ng_companion",
-    "short_name": "ng_companion",
+    "name": "flutter_counter",
+    "short_name": "flutter_counter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

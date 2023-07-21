@@ -1,4 +1,4 @@
-# ng_companion
+# flutter_counter
 
 A new Flutter project.
 
