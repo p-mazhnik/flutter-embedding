@@ -51,6 +51,7 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
     const target = ref.current
     let isRendered = true
     const initFlutterApp = async () => {
+      if (!isRendered) return
       const engineInitializer = await new Promise<any>((resolve) => {
         console.log('setup Flutter engine initializer...')
         _flutter.loader.loadEntrypoint({
