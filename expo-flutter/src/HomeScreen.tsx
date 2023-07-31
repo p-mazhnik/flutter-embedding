@@ -8,6 +8,7 @@ import {
 } from 'react-native-paper';
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Feather from "@expo/vector-icons/Feather";
+import { ExpoFlutterView } from '../modules/expo-flutter-view'
 
 const styles = StyleSheet.create({
   app: {
@@ -51,6 +52,7 @@ const styles = StyleSheet.create({
   },
 });
 
+// todo: support dash icon
 const DashIcon = () => {
   const theme = useTheme();
   return (
@@ -72,7 +74,7 @@ export function HomeScreen({
 }) {
   const theme = useTheme();
   const [screen, setScreen] = React.useState('counter');
-  const [clicks, setClicks] = React.useState(0);
+  const [clicks, setClicks] = React.useState(90);
   const [text, setText] = React.useState('');
   return (
     <View style={{ ...styles.app, backgroundColor: theme.colors.background }}>
@@ -92,7 +94,7 @@ export function HomeScreen({
           icon="github"
           size={30}
           onPress={() =>
-            Linking.openURL('https://github.com/p-mazhnik/rn-package-flutter/')
+            Linking.openURL('https://github.com/p-mazhnik/flutter-embedding/')
           }
         />
         {/*
@@ -169,37 +171,37 @@ export function HomeScreen({
             ...styles.flutterContainer,
             borderColor: theme.dark ? theme.colors.onSecondary : '#eee',
           }}>
-          {/*<FlutterView
+          <ExpoFlutterView
             webConfig={{
               useIframe: false,
               assetBase: '/flutter/',
               src: 'flutter/main.dart.js',
             }}
-            theme={isDarkMode ? 'dark' : 'light'}
+            theme={theme.dark ? 'dark' : 'light'}
             clicks={clicks}
             screen={screen}
             text={text}
             onClicksChange={setClicks}
             onTextChange={setText}
             onScreenChange={setScreen}
-          />*/}
+          />
         </View>
         <View
           style={{
             ...styles.flutterContainer,
             borderColor: theme.dark ? theme.colors.onSecondary : '#eee',
           }}>
-          {/*<FlutterView
+          <ExpoFlutterView
             webConfig={{
               useIframe: true,
               assetBase: '/flutter/',
               src: 'flutter/main.dart.js',
             }}
-            theme={isDarkMode ? 'dark' : 'light'}
+            theme={theme.dark ? 'dark' : 'light'}
             clicks={clicks}
             text="initial text"
             screen="counter"
-          />*/}
+          />
         </View>
       </ScrollView>
     </View>

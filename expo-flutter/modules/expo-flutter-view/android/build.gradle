@@ -81,9 +81,21 @@ android {
 
 repositories {
   mavenCentral()
+  maven {
+      // This maven repo is created when you run `flutter build aar`. It contains compiled code
+      // and resources for flutter_module itself.
+      url '../../../flutter_module/build/host/outputs/repo'
+  }
+  maven {
+      // This maven repo contains artifacts for Flutter's Android embedding.
+      url 'https://storage.googleapis.com/download.flutter.io'
+  }
 }
 
 dependencies {
   implementation project(':expo-modules-core')
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${getKotlinVersion()}"
+
+  debugImplementation 'com.example.flutter_module:flutter_debug:1.0'
+  releaseImplementation 'com.example.flutter_module:flutter_release:1.0'
 }

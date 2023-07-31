@@ -2,6 +2,7 @@ package expo.modules.flutterview
 
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
+import io.flutter.embedding.engine.FlutterEngineGroupCache
 
 class ExpoFlutterViewModule : Module() {
   // Each module class must implement the definition function. The definition consists of components
@@ -13,34 +14,37 @@ class ExpoFlutterViewModule : Module() {
     // The module will be accessible from `requireNativeModule('ExpoFlutterView')` in JavaScript.
     Name("ExpoFlutterView")
 
-    // Sets constant properties on the module. Can take a dictionary or a closure that returns a dictionary.
-    Constants(
-      "PI" to Math.PI
-    )
-
-    // Defines event names that the module can send to JavaScript.
-    Events("onChange")
-
-    // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      "Hello world! 👋"
-    }
-
-    // Defines a JavaScript function that always returns a Promise and whose native code
-    // is by default dispatched on the different thread than the JavaScript runtime runs on.
-    AsyncFunction("setValueAsync") { value: String ->
-      // Send an event to JavaScript.
-      sendEvent("onChange", mapOf(
-        "value" to value
-      ))
-    }
-
     // Enables the module to be used as a native view. Definition components that are accepted as part of
     // the view definition: Prop, Events.
     View(ExpoFlutterView::class) {
-      // Defines a setter for the `name` prop.
-      Prop("name") { view: ExpoFlutterView, prop: String ->
-        println(prop)
+      Prop("clicks") { view: ExpoFlutterView, clicks: Int ->
+        view.flutterCounterApi?.setClicks(clicks.toLong()) {}
+      }
+      Prop("text") { view: ExpoFlutterView, text: String ->
+        view.flutterCounterApi?.setText(text) {}
+      }
+      Prop("screen") { view: ExpoFlutterView, screen: String ->
+        view.flutterCounterApi?.setScreen(screen) {}
+      }
+      Prop("theme") { view: ExpoFlutterView, theme: String ->
+        view.flutterCounterApi?.setTheme(theme) {}
+      }
+      Events("onClicksChange", "onTextChange", "onScreenChange")
+    }
+
+    OnActivityResult { _, onActivityResultPayload ->
+        val engineGroup =
+            FlutterEngineGroupCache
+                .getInstance()
+                .get(ExpoFlutterViewPackage.ENGINE_GROUP_ID) as ExpoFlutterEngineGroup?
+        if (engineGroup != null) {
+        for (engine in engineGroup.activeEngines) {
+          engine.activityControlSurface.onActivityResult(
+            onActivityResultPayload.requestCode,
+            onActivityResultPayload.resultCode,
+            onActivityResultPayload.data
+          )
+        }
       }
     }
   }

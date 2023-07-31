@@ -1,11 +1,10 @@
 import * as React from 'react';
 
-import { ExpoFlutterViewProps } from './ExpoFlutterView.types';
+import { FlutterViewProps } from './ExpoFlutterView.types';
 
-export default function ExpoFlutterView(props: ExpoFlutterViewProps) {
+export default function ExpoFlutterView(props: FlutterViewProps) {
   return (
     <div>
-      <span>{props.name}</span>
     </div>
   );
 }

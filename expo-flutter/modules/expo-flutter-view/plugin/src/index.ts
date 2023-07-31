@@ -6,26 +6,26 @@ import {
 } from '@expo/config-plugins/build/utils/generateCode';
 
 const gradleMaven = [
-  `
-  allprojects {
-      repositories {
-          maven {
-              // This maven repo is created when you run \`flutter build aar\`. It contains compiled code
-              // and resources for flutter_module itself.
-              url '../flutter_module/build/host/outputs/repo'
-          }
-          maven {
-              // This maven repo contains artifacts for Flutter's Android embedding.
-              url 'https://storage.googleapis.com/download.flutter.io'
-          }
-      }
-  }
-  `,
+`
+allprojects {
+    repositories {
+        maven {
+            // This maven repo is created when you run \`flutter build aar\`. It contains compiled code
+            // and resources for flutter_module itself.
+            url '../../flutter_module/build/host/outputs/repo'
+        }
+        maven {
+            // This maven repo contains artifacts for Flutter's Android embedding.
+            url 'https://storage.googleapis.com/download.flutter.io'
+        }
+    }
+}
+`,
 ].join('\n');
 
 export function addFlutterImport(src: string): MergeResults {
   return appendContents({
-    tag: 'expo-flutter-view-import',
+    tag: 'expo-flutter-view',
     src,
     newSrc: gradleMaven,
     comment: '//',
@@ -44,7 +44,7 @@ function appendContents({
   comment: string;
 }): MergeResults {
   const header = createGeneratedHeaderComment(newSrc, tag, comment);
-  if (src.indexOf(header) != -1) {
+  if (src.indexOf(header) == -1) {
     // Ensure the old generated contents are removed.
     const sanitizedTarget = removeGeneratedContents(src, tag);
     const contentsToAdd = [
@@ -53,7 +53,7 @@ function appendContents({
       // contents
       newSrc,
       // @end
-      `${comment} @generated end ${tag}`,
+      `${comment} @generated end ${tag}\n`,
     ].join('\n');
 
     return {
@@ -66,14 +66,16 @@ function appendContents({
 }
 
 const withFlutter: ConfigPlugin = config => {
-  return withProjectBuildGradle(config, (config) => {
+  config = withProjectBuildGradle(config, (config) => {
     if (config.modResults.language === 'groovy') {
       config.modResults.contents = addFlutterImport(config.modResults.contents).contents;
     } else {
-      throw new Error('Cannot add camera maven gradle because the build.gradle is not groovy');
+      throw new Error('Cannot add flutter maven gradle because the build.gradle is not groovy');
     }
     return config;
   })
+
+  return config
 };
 
 export default withFlutter;

@@ -11,7 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "plugins": ["./modules/expo-flutter-view"],
+    "plugins": ["./modules/expo-flutter-view/app.plugin.js"],
     "assetBundlePatterns": [
       "**/*"
     ],

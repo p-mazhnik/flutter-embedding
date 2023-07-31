@@ -38,3 +38,20 @@ allprojects {
         maven { url 'https://www.jitpack.io' }
     }
 }
+// @generated begin expo-flutter-view - expo prebuild (DO NOT MODIFY) sync-237e236edacef0b80fbce6e3c43a0542ed11e158
+
+allprojects {
+    repositories {
+        maven {
+            // This maven repo is created when you run `flutter build aar`. It contains compiled code
+            // and resources for flutter_module itself.
+            url '../../flutter_module/build/host/outputs/repo'
+        }
+        maven {
+            // This maven repo contains artifacts for Flutter's Android embedding.
+            url 'https://storage.googleapis.com/download.flutter.io'
+        }
+    }
+}
+
+// @generated end expo-flutter-view
