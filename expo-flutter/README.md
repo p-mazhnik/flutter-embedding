@@ -76,6 +76,12 @@ $ npm run flutter:build:ios
 $ npm run flutter:build:web
 ```
 
+Then run `expo prebuild` command to prepare the Expo app:
+
+```console
+$ npx expo prebuild --clean
+```
+
 Finally, run the `npm run <platfrom>` command to start the Expo app on the desired platform:
 
 ```console

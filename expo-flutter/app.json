@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "expo-flutter",
+    "name": "Expo 🤝 Flutter",
     "slug": "expo-flutter",
+    "description": "Example of embedding Flutter into an Expo app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -31,7 +32,8 @@
     },
     "web": {
       "bundler": "metro",
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "description": "Example of embedding Flutter into an Expo app"
     }
   }
 }

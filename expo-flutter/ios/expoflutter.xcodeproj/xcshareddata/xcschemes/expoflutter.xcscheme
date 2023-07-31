@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "expoflutter.app"
-               BlueprintName = "expoflutter"
-               ReferencedContainer = "container:expoflutter.xcodeproj">
+               BuildableName = "ExpoFlutter.app"
+               BlueprintName = "ExpoFlutter"
+               ReferencedContainer = "container:ExpoFlutter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "expoflutterTests.xctest"
-               BlueprintName = "expoflutterTests"
-               ReferencedContainer = "container:expoflutter.xcodeproj">
+               BuildableName = "ExpoFlutterTests.xctest"
+               BlueprintName = "ExpoFlutterTests"
+               ReferencedContainer = "container:ExpoFlutter.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "expoflutter.app"
-            BlueprintName = "expoflutter"
-            ReferencedContainer = "container:expoflutter.xcodeproj">
+            BuildableName = "ExpoFlutter.app"
+            BlueprintName = "ExpoFlutter"
+            ReferencedContainer = "container:ExpoFlutter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "expoflutter.app"
-            BlueprintName = "expoflutter"
-            ReferencedContainer = "container:expoflutter.xcodeproj">
+            BuildableName = "ExpoFlutter.app"
+            BlueprintName = "ExpoFlutter"
+            ReferencedContainer = "container:ExpoFlutter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
