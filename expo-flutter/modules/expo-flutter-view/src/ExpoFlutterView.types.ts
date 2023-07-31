@@ -1,5 +1,4 @@
 export interface WebConfig {
-  useIframe?: boolean;
   assetBase?: string;
   src?: string;
 }
@@ -18,7 +17,6 @@ export interface FlutterViewProps {
 }
 
 export const defaultWebConfig: WebConfig = {
-  useIframe: true,
   assetBase: '',
   src: 'main.dart.js',
 }

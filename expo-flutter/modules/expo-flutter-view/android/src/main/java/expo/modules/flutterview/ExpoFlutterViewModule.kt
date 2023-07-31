@@ -1,5 +1,6 @@
 package expo.modules.flutterview
 
+import expo.modules.core.interfaces.services.UIManager
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 import io.flutter.embedding.engine.FlutterEngineGroupCache
@@ -30,14 +31,19 @@ class ExpoFlutterViewModule : Module() {
         view.flutterCounterApi?.setTheme(theme) {}
       }
       Events("onClicksChange", "onTextChange", "onScreenChange")
+
+      OnViewDestroys<ExpoFlutterView> { view ->
+        val uiManager = appContext.legacyModule<UIManager>()
+        uiManager?.unregisterLifecycleEventListener(view)
+      }
     }
 
     OnActivityResult { _, onActivityResultPayload ->
-        val engineGroup =
-            FlutterEngineGroupCache
-                .getInstance()
-                .get(ExpoFlutterViewPackage.ENGINE_GROUP_ID) as ExpoFlutterEngineGroup?
-        if (engineGroup != null) {
+      val engineGroup =
+        FlutterEngineGroupCache
+          .getInstance()
+          .get(ExpoFlutterViewPackage.ENGINE_GROUP_ID) as ExpoFlutterEngineGroup?
+      if (engineGroup != null) {
         for (engine in engineGroup.activeEngines) {
           engine.activityControlSurface.onActivityResult(
             onActivityResultPayload.requestCode,

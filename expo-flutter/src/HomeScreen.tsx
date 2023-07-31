@@ -6,19 +6,15 @@ import {
   TextInput,
   useTheme,
 } from 'react-native-paper';
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Feather from "@expo/vector-icons/Feather";
 import { ExpoFlutterView } from '../modules/expo-flutter-view'
+import FlutterDash from './assets/flutter-dash.svg';
 
 const styles = StyleSheet.create({
   app: {
     flex: 1,
   },
-  appBarTitleStyle: {
-    fontSize: Platform.select({
-      native: 18,
-    }),
-  },
+  appBarTitleStyle: {},
   flutterContainer: {
     overflow: 'hidden',
     borderRadius: 10,
@@ -52,11 +48,10 @@ const styles = StyleSheet.create({
   },
 });
 
-// todo: support dash icon
 const DashIcon = () => {
   const theme = useTheme();
   return (
-    <MaterialIcons name="flutter-dash" size={30} color={theme.colors.onSurfaceVariant} />
+    <FlutterDash width={30} height={30} color={theme.colors.onSurfaceVariant} />
   );
 };
 
@@ -74,16 +69,14 @@ export function HomeScreen({
 }) {
   const theme = useTheme();
   const [screen, setScreen] = React.useState('counter');
-  const [clicks, setClicks] = React.useState(90);
+  const [clicks, setClicks] = React.useState(42);
   const [text, setText] = React.useState('');
   return (
     <View style={{ ...styles.app, backgroundColor: theme.colors.background }}>
       <Appbar.Header mode="small" elevated>
         <Appbar.Content
           titleStyle={styles.appBarTitleStyle}
-          title={`React Native ${
-            Platform.OS === 'web' ? 'Web' : ''
-          } 🤝 Flutter`}
+          title={`Expo 🤝 Flutter`}
         />
         <Appbar.Action
           icon={ThemeIcon}
@@ -97,13 +90,11 @@ export function HomeScreen({
             Linking.openURL('https://github.com/p-mazhnik/flutter-embedding/')
           }
         />
-        {/*
-        // todo
         <Appbar.Action
           icon={DashIcon}
           size={30}
           onPress={() => Linking.openURL('https://flutter.dev/')}
-        />*/}
+        />
       </Appbar.Header>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
@@ -173,7 +164,6 @@ export function HomeScreen({
           }}>
           <ExpoFlutterView
             webConfig={{
-              useIframe: false,
               assetBase: '/flutter/',
               src: 'flutter/main.dart.js',
             }}
@@ -186,23 +176,24 @@ export function HomeScreen({
             onScreenChange={setScreen}
           />
         </View>
-        <View
-          style={{
-            ...styles.flutterContainer,
-            borderColor: theme.dark ? theme.colors.onSecondary : '#eee',
-          }}>
-          <ExpoFlutterView
-            webConfig={{
-              useIframe: true,
-              assetBase: '/flutter/',
-              src: 'flutter/main.dart.js',
-            }}
-            theme={theme.dark ? 'dark' : 'light'}
-            clicks={clicks}
-            text="initial text"
-            screen="counter"
-          />
-        </View>
+        {Platform.OS != 'web' &&
+          <View
+            style={{
+              ...styles.flutterContainer,
+              borderColor: theme.dark ? theme.colors.onSecondary : '#eee',
+            }}>
+            <ExpoFlutterView
+              webConfig={{
+                assetBase: '/flutter/',
+                src: 'flutter/main.dart.js',
+              }}
+              theme={theme.dark ? 'dark' : 'light'}
+              clicks={clicks}
+              text="initial text"
+              screen="counter"
+            />
+          </View>
+        }
       </ScrollView>
     </View>
   );

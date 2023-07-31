@@ -5,6 +5,7 @@
   "scripts": {
     "flutter:build-android": "cd flutter_module && flutter build aar && cd -",
     "flutter:build-ios": "sh scripts/flutter_build_ios.sh",
+    "flutter:build-web": "cd flutter_module && flutter build web --base-href /flutter/ --output=../public/flutter && cd -",
     "build:plugin": "cd modules/expo-flutter-view && expo-module build plugin",
     "start": "expo start",
     "android": "expo run:android",
@@ -12,7 +13,9 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/html-elements": "^0.5.1",
     "expo": "~49.0.5",
+    "expo-build-properties": "~0.8.3",
     "expo-splash-screen": "~0.20.4",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
@@ -20,8 +23,9 @@
     "react-native": "0.72.3",
     "react-native-paper": "^5.9.1",
     "react-native-safe-area-context": "^4.7.1",
+    "react-native-svg-transformer": "^1.1.0",
     "react-native-web": "~0.19.6",
-    "expo-build-properties": "~0.8.3"
+    "react-native-svg": "13.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
