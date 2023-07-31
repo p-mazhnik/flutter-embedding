@@ -4,6 +4,7 @@ import {
   MergeResults,
   removeGeneratedContents,
 } from '@expo/config-plugins/build/utils/generateCode';
+import { PluginConfigType } from 'expo-build-properties/src/pluginConfig'
 
 const gradleMaven = [
 `
@@ -74,6 +75,39 @@ const withFlutter: ConfigPlugin = config => {
     }
     return config;
   })
+
+  const buildConfig: PluginConfigType = {
+    ios: {
+      extraPods: [
+        {
+          name: 'FlutterModule-Debug',
+          configurations: ['Debug'],
+          podspec: '../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Debug.podspec'
+        },
+        {
+          name: 'FlutterModule-Release',
+          configurations: ['Release'],
+          podspec: '../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Release.podspec'
+        }
+      ],
+    }
+  }
+
+  // config = withBuildProperties(config, buildConfig)
+
+  if (!config.plugins) {
+    config.plugins = []
+  }
+
+  config.plugins = [
+    ...config.plugins,
+    [
+      "expo-build-properties",
+      buildConfig
+    ]
+  ]
+
+  config.ios
 
   return config
 };

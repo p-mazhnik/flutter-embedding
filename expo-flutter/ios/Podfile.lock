@@ -13,6 +13,8 @@ PODS:
     - ExpoModulesCore
   - ExpoFlutterView (1.0.0):
     - ExpoModulesCore
+    - FlutterModule-Debug
+    - FlutterModule-Release
   - ExpoKeepAwake (12.3.0):
     - ExpoModulesCore
   - ExpoModulesCore (1.5.8):
@@ -33,6 +35,8 @@ PODS:
     - React-Core (= 0.72.3)
     - React-jsi (= 0.72.3)
     - ReactCommon/turbomodule/core (= 0.72.3)
+  - FlutterModule-Debug (1.0.0)
+  - FlutterModule-Release (1.0.0)
   - fmt (6.2.1)
   - glog (0.3.5)
   - hermes-engine (0.72.3):
@@ -468,6 +472,8 @@ DEPENDENCIES:
   - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
+  - FlutterModule-Debug (from `../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Debug.podspec`)
+  - FlutterModule-Release (from `../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Release.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - libevent (~> 2.1.12)
@@ -540,6 +546,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
+  FlutterModule-Debug:
+    :podspec: "../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Debug.podspec"
+  FlutterModule-Release:
+    :podspec: "../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Release.podspec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   hermes-engine:
@@ -622,12 +632,14 @@ SPEC CHECKSUMS:
   EXFileSystem: d7f59869885cfeab3ac771e2a8d0f5ed98cd3fdb
   EXFont: 738c44c390953ebcbab075a4848bfbef025fd9ee
   Expo: f2485e8fab9988e5dcee34159df5e475c9c3730c
-  ExpoFlutterView: b6c89b132563c83cecb3af6f6d3df5d129e684d2
+  ExpoFlutterView: 1171bca0c23557b6c001bd6944f3c92b1fdfa683
   ExpoKeepAwake: be4cbd52d9b177cde0fd66daa1913afa3161fc1d
   ExpoModulesCore: 924a69d9bffa2925c1f7eafab37764565f861d5d
   EXSplashScreen: 89586b0961acd173b04713b7457949b063a659da
   FBLazyVector: 4cce221dd782d3ff7c4172167bba09d58af67ccb
   FBReactNativeSpec: c6bd9e179757b3c0ecf815864fae8032377903ef
+  FlutterModule-Debug: f92e5f2f5ac68eeb946dbc1a0a3a76da4273c715
+  FlutterModule-Release: df83085924b37e0295cdd589d24be2eb846e85fd
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 10fbd3f62405c41ea07e71973ea61e1878d07322

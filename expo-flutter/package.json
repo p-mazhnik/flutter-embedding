@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "flutter:build-android": "",
+    "flutter:build-android": "cd flutter_module && flutter build aar && cd -",
+    "flutter:build-ios": "sh scripts/flutter_build_ios.sh",
     "build:plugin": "cd modules/expo-flutter-view && expo-module build plugin",
     "start": "expo start",
     "android": "expo run:android",
@@ -19,7 +20,8 @@
     "react-native": "0.72.3",
     "react-native-paper": "^5.9.1",
     "react-native-safe-area-context": "^4.7.1",
-    "react-native-web": "~0.19.6"
+    "react-native-web": "~0.19.6",
+    "expo-build-properties": "~0.8.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

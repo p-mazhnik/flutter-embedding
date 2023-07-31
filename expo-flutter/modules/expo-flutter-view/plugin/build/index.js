@@ -60,6 +60,34 @@ const withFlutter = config => {
         }
         return config;
     });
+    const buildConfig = {
+        ios: {
+            extraPods: [
+                {
+                    name: 'FlutterModule-Debug',
+                    configurations: ['Debug'],
+                    podspec: '../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Debug.podspec'
+                },
+                {
+                    name: 'FlutterModule-Release',
+                    configurations: ['Release'],
+                    podspec: '../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Release.podspec'
+                }
+            ],
+        }
+    };
+    // config = withBuildProperties(config, buildConfig)
+    if (!config.plugins) {
+        config.plugins = [];
+    }
+    config.plugins = [
+        ...config.plugins,
+        [
+            "expo-build-properties",
+            buildConfig
+        ]
+    ];
+    config.ios;
     return config;
 };
 exports.default = withFlutter;
