@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "flutter:build-android": "cd flutter_module && flutter build aar && cd -",
-    "flutter:build-ios": "sh scripts/flutter_build_ios.sh",
-    "flutter:build-web": "cd flutter_module && flutter build web --base-href /flutter/ --output=../public/flutter && cd -",
+    "flutter:build:android": "cd flutter_module && flutter build aar && cd -",
+    "flutter:build:ios": "sh scripts/flutter_build_ios.sh",
+    "flutter:build:web": "cd flutter_module && flutter build web --base-href /flutter/ --output=../public/flutter && cd -",
     "build:plugin": "cd modules/expo-flutter-view && expo-module build plugin",
     "start": "expo start",
     "android": "expo run:android",
