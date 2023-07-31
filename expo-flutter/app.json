@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Expo 🤝 Flutter",
+    "slug": "expo-flutter",
+    "description": "Example of embedding Flutter into an Expo app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "plugins": [
+      "./modules/expo-flutter-view/app.plugin.js",
+      "expo-build-properties"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.expoapp"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.example.expoapp"
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/favicon.png",
+      "description": "Example of embedding Flutter into an Expo app"
+    }
+  }
+}

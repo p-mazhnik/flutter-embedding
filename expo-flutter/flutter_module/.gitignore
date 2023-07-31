@@ -1,0 +1,82 @@
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+
+.DS_Store
+.idea/
+.vscode/
+.vagrant/
+.sconsign.dblite
+.svn/
+
+*.swp
+profile
+
+DerivedData/
+
+.generated/
+
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+
+xcuserdata
+
+*.moved-aside
+
+*.pyc
+*sync/
+.tags*
+
+build/
+.android/
+.ios/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Xcode
+#
+*.xccheckout
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+
+# Android/IntelliJ
+#
+.gradle
+local.properties
+*.iml
+android/
+
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+
+package-lock.json
