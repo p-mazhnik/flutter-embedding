@@ -11,3 +11,29 @@ Contains examples of how to embed Flutter in React apps
   On web, renders Flutter module in a custom `hostElement`.  
   On Android, renders Flutter module in a `FlutterView`.  
   On iOS, renders Flutter module in a `FlutterViewController`.
+
+<details>
+  <summary>Screenshots</summary>
+  <table>
+  <thead>
+    <tr>
+      <th>Android</th>
+      <th>iOS</th>
+      <th>Web</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <img src="./expo-flutter/docs/android.jpg" alt="android" />
+      </td>
+      <td>
+        <img src="./expo-flutter/docs/ios.png" alt="ios"/>
+      </td>
+      <td>
+        <img src="./expo-flutter/docs/web.png" alt="web" />
+      </td>
+    </tr>
+  </tbody>
+  </table>
+</details>
