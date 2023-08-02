@@ -2,7 +2,7 @@
 
 # addresses https://github.com/expo/expo/issues/20562
 
-SEDOPTION=
+SEDOPTION="-i"
 if [[ "$OSTYPE" == "darwin"* ]]; then
   SEDOPTION="-i ''"
 fi
