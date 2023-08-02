@@ -12,9 +12,7 @@ Contains examples of how to embed Flutter in React apps
   On Android, renders Flutter module in a `FlutterView`.  
   On iOS, renders Flutter module in a `FlutterViewController`.
 
-<details>
-  <summary>Screenshots</summary>
-  <table>
+<table>
   <thead>
     <tr>
       <th>Android</th>
@@ -35,5 +33,4 @@ Contains examples of how to embed Flutter in React apps
       </td>
     </tr>
   </tbody>
-  </table>
-</details>
+</table>

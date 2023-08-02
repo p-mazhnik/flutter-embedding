@@ -8,6 +8,33 @@ This project created with [Expo](https://expo.dev/) using
 Additionally, Expo module created using 
 `npx create-expo-module@latest --local` command.
 
+<details>
+  <summary>Screenshots</summary>
+  <table>
+    <thead>
+      <tr>
+        <th>Android</th>
+        <th>iOS</th>
+        <th>Web</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <img src="./docs/android.jpg" alt="android" />
+        </td>
+        <td>
+          <img src="./docs/ios.png" alt="ios"/>
+        </td>
+        <td>
+          <img src="./docs/web.png" alt="web" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
+
 ## Points of Interest
 
 ### Flutter
