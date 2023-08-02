@@ -8,6 +8,7 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import FlutterDashIcon from '@mui/icons-material/FlutterDash'
+import GitHubIcon from '@mui/icons-material/GitHub'
 import Drawer from '@mui/material/Drawer'
 import CssBaseline from '@mui/material/CssBaseline'
 import List from '@mui/material/List'
@@ -108,6 +109,9 @@ function App () {
     const text = event.target.value || ''
     setText(text)
   }
+  const openInNewTab = (url: string) => {
+    window.open(url, '_blank', 'noreferrer')
+  }
   return (
     <Box sx={{ display: 'flex', flexGrow: 1 }}>
       <CssBaseline/>
@@ -121,12 +125,30 @@ function App () {
             onClick={handleDrawer}
             sx={{ mr: 2 }}
           >
-            <MenuIcon/>
+            <MenuIcon sx={{ fontSize: 28 }}/>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             React 🤝 Flutter
           </Typography>
-          <FlutterDashIcon/>
+          <IconButton
+            size="large"
+            edge="end"
+            color="inherit"
+            aria-label="menu"
+            onClick={() => openInNewTab('https://github.com/p-mazhnik/flutter-embedding/')}
+            sx={{ mr: 1 }}
+          >
+            <GitHubIcon sx={{ fontSize: 28 }}/>
+          </IconButton>
+          <IconButton
+            size="large"
+            edge="end"
+            color="inherit"
+            aria-label="flutter"
+            onClick={() => openInNewTab('https://flutter.dev/')}
+          >
+            <FlutterDashIcon sx={{ fontSize: 28 }}/>
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer

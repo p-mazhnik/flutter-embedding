@@ -8,6 +8,32 @@ This project created with [Expo](https://expo.dev/) using
 Additionally, Expo module created using 
 `npx create-expo-module@latest --local` command.
 
+<details>
+  <summary>Screenshots</summary>
+  <table>
+    <thead>
+      <tr>
+        <th>Android</th>
+        <th>iOS</th>
+        <th>Web</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <img src="./docs/android.jpg" alt="android" />
+        </td>
+        <td>
+          <img src="./docs/ios.png" alt="ios"/>
+        </td>
+        <td>
+          <img src="./docs/web.png" alt="web" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
 ## Points of Interest
 
 ### Flutter
@@ -17,6 +43,9 @@ That application is a standard Flutter module.
 - The [pigeon](https://pub.dev/packages/pigeon) plugin is used to generate interop APIs and data classes on mobile.
 - `@staticInterop` and `createDartExport` methods are used to allow certain Dart functions to be called 
   from JavaScript on web.
+
+The same `DemoAppStateManager` model class is used within the Kotlin/Swift program,
+the Dart program and in the interop between JS/Kotlin/Swift and Dart.
 
 ### Expo
 
@@ -89,3 +118,8 @@ $ npm run android
 $ npm run ios
 $ npm run web
 ```
+
+## Learn More
+
+Embedding into the regular React Native app with web support: 
+[p-mazhnik/rn-package-flutter](https://github.com/p-mazhnik/rn-package-flutter)

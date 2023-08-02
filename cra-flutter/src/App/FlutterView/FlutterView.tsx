@@ -42,9 +42,9 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
     state.onTextChanged(onTextChange)
     state.onScreenChanged(onScreenChange)
     // set initial values
-    flutterState.current?.setText(text)
-    flutterState.current?.setScreen(screen)
-    flutterState.current?.setClicks(clicks)
+    state.setText(text)
+    state.setScreen(screen)
+    state.setClicks(clicks)
   }
 
   useEffect(() => {
@@ -91,13 +91,13 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
 
   useEffect(() => {
     flutterState.current?.setText(text)
-  }, [text]);
+  }, [text])
   useEffect(() => {
     flutterState.current?.setScreen(screen)
-  }, [screen]);
+  }, [screen])
   useEffect(() => {
     flutterState.current?.setClicks(clicks)
-  }, [clicks]);
+  }, [clicks])
 
   return (
     <div
@@ -105,7 +105,7 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
       style={divStyle}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-        <CircularProgress />
+        <CircularProgress/>
       </Box>
     </div>
   )
