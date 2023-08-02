@@ -6,9 +6,12 @@ module.exports = (() => {
 
   const { transformer, resolver } = config;
 
+  const publicPath = (process.env.PUBLIC_URL ?? '') + transformer.publicPath
+
   config.transformer = {
     ...transformer,
     babelTransformerPath: require.resolve("react-native-svg-transformer"),
+    publicPath: publicPath,
   };
   config.resolver = {
     ...resolver,
