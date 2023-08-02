@@ -34,6 +34,8 @@ Additionally, Expo module created using
   </table>
 </details>
 
+Web is deployed to [p-mazhnik.github.io/flutter-embedding/expo](https://p-mazhnik.github.io/flutter-embedding/expo).
+
 ## Points of Interest
 
 ### Flutter
