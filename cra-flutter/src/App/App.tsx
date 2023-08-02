@@ -110,8 +110,8 @@ function App () {
     setText(text)
   }
   const openInNewTab = (url: string) => {
-    window.open(url, '_blank', 'noreferrer');
-  };
+    window.open(url, '_blank', 'noreferrer')
+  }
   return (
     <Box sx={{ display: 'flex', flexGrow: 1 }}>
       <CssBaseline/>
@@ -125,7 +125,7 @@ function App () {
             onClick={handleDrawer}
             sx={{ mr: 2 }}
           >
-            <MenuIcon sx={{ fontSize: 28 }} />
+            <MenuIcon sx={{ fontSize: 28 }}/>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             React 🤝 Flutter
@@ -138,7 +138,7 @@ function App () {
             onClick={() => openInNewTab('https://github.com/p-mazhnik/flutter-embedding/')}
             sx={{ mr: 1 }}
           >
-            <GitHubIcon sx={{ fontSize: 28 }} />
+            <GitHubIcon sx={{ fontSize: 28 }}/>
           </IconButton>
           <IconButton
             size="large"
@@ -147,7 +147,7 @@ function App () {
             aria-label="flutter"
             onClick={() => openInNewTab('https://flutter.dev/')}
           >
-            <FlutterDashIcon sx={{ fontSize: 28 }} />
+            <FlutterDashIcon sx={{ fontSize: 28 }}/>
           </IconButton>
         </Toolbar>
       </AppBar>

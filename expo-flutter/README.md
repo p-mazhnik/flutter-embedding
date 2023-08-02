@@ -34,7 +34,6 @@ Additionally, Expo module created using
   </table>
 </details>
 
-
 ## Points of Interest
 
 ### Flutter
