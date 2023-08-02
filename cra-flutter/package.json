@@ -4,7 +4,7 @@
   "scripts": {
     "prestart": "rimraf node_modules/.cache/",
     "start": "react-scripts start",
-    "prebuild": "cd flutter && flutter clean && flutter build web --output=../public/flutter && cd -",
+    "prebuild": "cd flutter && flutter clean && flutter build web --base-href $PUBLIC_URL/flutter/ --output=../public/flutter && cd -",
     "build": "react-scripts build",
     "test": "react-scripts test"
   },
@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "7.21.0",
     "ncp": "^2.0.0",
     "rimraf": "^5.0.1"
   }

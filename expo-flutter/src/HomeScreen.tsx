@@ -164,8 +164,8 @@ export function HomeScreen({
           }}>
           <ExpoFlutterView
             webConfig={{
-              assetBase: '/flutter/',
-              src: 'flutter/main.dart.js',
+              assetBase: (process.env.PUBLIC_URL ?? '') + '/flutter/',
+              src: (process.env.PUBLIC_URL ?? '') + '/flutter/main.dart.js',
             }}
             theme={theme.dark ? 'dark' : 'light'}
             clicks={clicks}
@@ -184,8 +184,8 @@ export function HomeScreen({
             }}>
             <ExpoFlutterView
               webConfig={{
-                assetBase: '/flutter/',
-                src: 'flutter/main.dart.js',
+                assetBase: (process.env.PUBLIC_URL ?? '') + '/flutter/',
+                src: (process.env.PUBLIC_URL ?? '') + '/flutter/main.dart.js',
               }}
               theme={theme.dark ? 'dark' : 'light'}
               clicks={clicks}
