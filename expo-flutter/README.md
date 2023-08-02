@@ -45,6 +45,9 @@ That application is a standard Flutter module.
 - `@staticInterop` and `createDartExport` methods are used to allow certain Dart functions to be called 
   from JavaScript on web.
 
+The same `DemoAppStateManager` model class is used within the Kotlin/Swift program,
+the Dart program and in the interop between JS/Kotlin/Swift and Dart.
+
 ### Expo
 
 - `modules/expo-flutter-view` is a standard Expo module, that contains a native view
