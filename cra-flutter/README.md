@@ -6,6 +6,8 @@ web apps could be integrated, and have them interop.
 This project bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
 using `npm init react-app cra-flutter --template typescript` command.
 
+Deployed to [p-mazhnik.github.io/flutter-embedding](https://p-mazhnik.github.io/flutter-embedding).
+
 ## Points of Interest
 
 ### React
@@ -114,6 +116,5 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+To learn React, check out the [React documentation](https://reactjs.org/).  
+To learn Flutter, check out the [Flutter documentation](https://flutter.dev/docs).

@@ -116,3 +116,8 @@ $ npm run android
 $ npm run ios
 $ npm run web
 ```
+
+## Learn More
+
+Embedding into the regular React Native app with web support: 
+[p-mazhnik/rn-package-flutter](https://github.com/p-mazhnik/rn-package-flutter)
