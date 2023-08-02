@@ -42,9 +42,9 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
     state.onTextChanged(onTextChange)
     state.onScreenChanged(onScreenChange)
     // set initial values
-    flutterState.current?.setText(text)
-    flutterState.current?.setScreen(screen)
-    flutterState.current?.setClicks(clicks)
+    state.setText(text)
+    state.setScreen(screen)
+    state.setClicks(clicks)
   }
 
   useEffect(() => {
