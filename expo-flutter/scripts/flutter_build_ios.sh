@@ -1,5 +1,3 @@
-#!/bin/bash
-
 rm -rf modules/expo-flutter-view/ios/Flutter
 cd flutter_module
 flutter build ios-framework --output=../modules/expo-flutter-view/ios/Flutter

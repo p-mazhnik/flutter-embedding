@@ -13,7 +13,7 @@
     "web": "expo start --web",
     "prebuild:web": "npm run flutter:build:web",
     "build:web": "expo export -p web",
-    "gh:prepare:web": "sh scripts/prepare_web.sh"
+    "gh:prepare:web": "bash scripts/prepare_web.sh"
   },
   "dependencies": {
     "@expo/html-elements": "^0.5.1",
