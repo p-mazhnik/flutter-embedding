@@ -79,12 +79,17 @@ interface View {
 
 function App ({ flutterApp }: { flutterApp: any }) {
   const theme = useTheme()
-  const [drawerOpened, setDrawerOpened] = React.useState(false)
+  const [drawerOpened, setDrawerOpened] = React.useState(true)
   const [classNames, setClassNames] = React.useState('')
   const [screen, setScreen] = React.useState('counter')
   const [clicks, setClicks] = React.useState(0)
   const [text, setText] = React.useState('')
-  const [views, setViews] = React.useState<View[]>([{id: 1, type: 'FLUTTER'}])
+  const [views, setViews] = React.useState<View[]>([
+    { id: 1, type: 'FLUTTER' },
+    { id: 2, type: 'REACT' },
+    { id: 3, type: 'REACT' },
+    { id: 4, type: 'FLUTTER' }
+  ])
   const handleDrawer = () => {
     setDrawerOpened(!drawerOpened)
   }
