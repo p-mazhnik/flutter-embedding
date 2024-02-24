@@ -3,13 +3,12 @@ description: A flutter module with a counter that can be manipulated from the ho
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.3.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  js: ^0.6.7
+  web: ^0.5.0
 
 dev_dependencies:
   flutter_test:

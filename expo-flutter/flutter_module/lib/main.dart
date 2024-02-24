@@ -9,7 +9,7 @@ import 'pages/text.dart';
 import 'src/counter_state_manager.dart';
 
 import 'src/communication/native.dart'
-  if (dart.library.html) 'src/communication/web.dart'
+  if (dart.library.js_interop) 'src/communication/web.dart'
   as multi_platform;
 
 void main() {
