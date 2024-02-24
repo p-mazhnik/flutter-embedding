@@ -2,17 +2,14 @@ import React, { useEffect, useRef, memo } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 
-// The global _flutter namespace
-declare var _flutter: any
-
 const divStyle: React.CSSProperties = {
   height: '100%',
   width: '100%',
 }
 
 interface FlutterViewProps {
-  assetBase?: string;
-  src?: string;
+  flutterApp: any
+
   onClicksChange?: (clicks: number) => void;
   onScreenChange?: (screen: string) => void;
   onTextChange?: (text: string) => void;
@@ -23,8 +20,7 @@ interface FlutterViewProps {
 }
 
 export const FlutterView: React.FC<FlutterViewProps> = memo(({
-  assetBase = '',
-  src = 'main.dart.js',
+  flutterApp,
   onClicksChange,
   onScreenChange,
   onTextChange,
@@ -49,29 +45,7 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
 
   useEffect(() => {
     const target = ref.current
-    let isRendered = true
-    const initFlutterApp = async () => {
-      if (!isRendered) return
-      const engineInitializer = await new Promise<any>((resolve) => {
-        console.log('setup Flutter engine initializer...')
-        _flutter.loader.loadEntrypoint({
-          entrypointUrl: src,
-          onEntrypointLoaded: resolve,
-        })
-      })
-      if (!isRendered) return
-
-      console.log('initialize Flutter engine...')
-      const appRunner = await engineInitializer?.initializeEngine({
-        hostElement: target,
-        assetBase: assetBase,
-      })
-      if (!isRendered) return
-
-      console.log('run Flutter engine...')
-      await appRunner?.runApp()
-    }
-    initFlutterApp()
+    const viewPromise: Promise<number> = flutterApp.addView({ hostElement: target })
 
     const eventListener = (event: Event) => {
       let state = (event as CustomEvent).detail
@@ -83,8 +57,12 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
     })
 
     return () => {
-      isRendered = false
       target?.removeEventListener('flutter-initialized', eventListener)
+      const removeView = async () => {
+        const viewId = await viewPromise
+        flutterApp.removeView(viewId)
+      }
+      removeView()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

@@ -1,6 +1,9 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_counter/src/widgets.dart';
 
 import 'pages/counter.dart';
 import 'pages/dash.dart';
@@ -9,7 +12,11 @@ import 'pages/text.dart';
 import 'src/js_interop.dart';
 
 void main() {
-  runApp(const MyApp());
+  runWidget(
+    MultiViewApp(
+      viewBuilder: (BuildContext context) => const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -35,10 +42,16 @@ class _MyAppState extends State<MyApp> {
       counter: _counter,
       text: _text,
     );
-    final export = createDartExport(_state);
+  }
+
+  @override
+  void didChangeDependencies() {
+    final export = createJSInteropWrapper(_state);
+    final int viewId = View.of(context).viewId;
 
     // Emit this through the root object of the flutter app :)
-    broadcastAppEvent('flutter-initialized', export);
+    broadcastAppEvent(viewId, 'flutter-initialized', export);
+    super.didChangeDependencies();
   }
 
   @override

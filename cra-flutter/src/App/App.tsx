@@ -78,7 +78,7 @@ const EffectButton = ({ title, toggleClassName }: { title: string, toggleClassNa
   )
 }
 
-function App () {
+function App ({ flutterApp }: { flutterApp: any }) {
   const theme = useTheme()
   const [drawerOpened, setDrawerOpened] = React.useState(false)
   const [classNames, setClassNames] = React.useState('')
@@ -219,8 +219,7 @@ function App () {
       <Main open={drawerOpened}>
         <FlutterAppWrapper className={classNames}>
           <FlutterView
-            assetBase={process.env.PUBLIC_URL + '/flutter/'}
-            src={process.env.PUBLIC_URL + '/flutter/main.dart.js'}
+            flutterApp={flutterApp}
             onClicksChange={setClicks}
             onScreenChange={setScreen}
             onTextChange={setText}

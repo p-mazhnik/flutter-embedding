@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:js/js.dart';
+import 'dart:js_interop';
 
 enum DemoScreen {
   counter('counter'),
