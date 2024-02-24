@@ -2,3 +2,4 @@
 .vscode/
 build/*
 !build/react-multiview/
+!build/expo-multiview/
