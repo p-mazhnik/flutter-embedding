@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, memo } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
+import { ViewWrapper } from '../ViewWrapper'
 
 const divStyle: React.CSSProperties = {
   height: '100%',
@@ -14,9 +15,13 @@ interface FlutterViewProps {
   onScreenChange?: (screen: string) => void;
   onTextChange?: (text: string) => void;
 
+  removeView: () => void;
+
   text: string;
   screen: string;
   clicks: number;
+
+  className?: string | undefined
 }
 
 export const FlutterView: React.FC<FlutterViewProps> = memo(({
@@ -24,9 +29,11 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
   onClicksChange,
   onScreenChange,
   onTextChange,
+  removeView,
   text,
   screen,
   clicks,
+  className,
 }) => {
   const flutterState = useRef<any>(null)
   const ref = useRef<HTMLDivElement>(null)
@@ -60,6 +67,7 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
       target?.removeEventListener('flutter-initialized', eventListener)
       const removeView = async () => {
         const viewId = await viewPromise
+        console.log(`[React] remove view: ${viewId}`)
         flutterApp.removeView(viewId)
       }
       removeView()
@@ -78,13 +86,15 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
   }, [clicks])
 
   return (
-    <div
-      ref={ref}
-      style={divStyle}
-    >
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-        <CircularProgress/>
+    <ViewWrapper className={className} removeView={removeView}>
+      <Box
+        ref={ref}
+        style={divStyle}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+          <CircularProgress/>
+        </Box>
       </Box>
-    </div>
+    </ViewWrapper>
   )
 })

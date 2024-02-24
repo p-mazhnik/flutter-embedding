@@ -48,6 +48,7 @@ class _MyAppState extends State<MyApp> {
   void didChangeDependencies() {
     final export = createJSInteropWrapper(_state);
     final int viewId = View.of(context).viewId;
+    print('[Flutter] initialize view: $viewId');
 
     // Emit this through the root object of the flutter app :)
     broadcastAppEvent(viewId, 'flutter-initialized', export);
@@ -61,10 +62,18 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final int viewId = View.of(context).viewId;
+    final color = switch (viewId % 5) {
+      0 => Colors.blue,
+      1 => Colors.indigo,
+      2 => Colors.deepOrange,
+      3 => Colors.purple,
+      _ => Colors.green,
+    };
     return MaterialApp(
       title: 'React 🤝 Flutter',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(seedColor: color),
         useMaterial3: true,
       ),
       home: ValueListenableBuilder<DemoScreen>(
