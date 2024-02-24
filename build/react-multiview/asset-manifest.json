@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/flutter-embedding/react-multiview/static/css/main.2f7bab45.css",
+    "main.js": "/flutter-embedding/react-multiview/static/js/main.07703031.js",
+    "static/js/787.7f6c38ee.chunk.js": "/flutter-embedding/react-multiview/static/js/787.7f6c38ee.chunk.js",
+    "index.html": "/flutter-embedding/react-multiview/index.html",
+    "main.2f7bab45.css.map": "/flutter-embedding/react-multiview/static/css/main.2f7bab45.css.map",
+    "main.07703031.js.map": "/flutter-embedding/react-multiview/static/js/main.07703031.js.map",
+    "787.7f6c38ee.chunk.js.map": "/flutter-embedding/react-multiview/static/js/787.7f6c38ee.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2f7bab45.css",
+    "static/js/main.07703031.js"
+  ]
+}
