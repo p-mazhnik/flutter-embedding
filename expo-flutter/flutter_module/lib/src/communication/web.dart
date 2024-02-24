@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_module/src/counter_state_manager.dart';
-import 'package:js/js.dart';
+import 'dart:js_interop';
 
 import 'js_interop.dart';
 
@@ -53,7 +53,7 @@ class JSDemoAppStateManager extends DemoAppStateManager {
 
 void setupFlutterApi(DemoAppStateManager state) {
   assert(state is JSDemoAppStateManager);
-  final export = createDartExport(state as JSDemoAppStateManager);
+  final export = createJSInteropWrapper(state as JSDemoAppStateManager);
   broadcastAppEvent('flutter-initialized', export);
 }
 
