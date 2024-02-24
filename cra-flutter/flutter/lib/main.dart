@@ -1,7 +1,3 @@
-// ignore_for_file: avoid_web_libraries_in_flutter
-
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_counter/src/widgets.dart';
 
