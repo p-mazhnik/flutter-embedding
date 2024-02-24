@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
 import 'package:flutter/material.dart';
+import 'package:flutter_module/src/widgets.dart';
 
 import 'pages/counter.dart';
 import 'pages/dash.dart';
@@ -13,7 +14,11 @@ import 'src/communication/native.dart'
   as multi_platform;
 
 void main() {
-  runApp(const MyApp());
+  runWidget(
+    MultiViewApp(
+      viewBuilder: (BuildContext context) => const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -47,7 +52,6 @@ class _MyAppState extends State<MyApp> {
       theme: _theme,
     );
     _themeMode = _theme.value;
-    multi_platform.setupFlutterApi(_state);
     _theme.addListener(() {
       setState(() {
         _themeMode = _theme.value;
@@ -56,19 +60,28 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void didChangeDependencies() {
+    final int viewId = View.of(context).viewId;
+    multi_platform.setupFlutterApi(viewId, _state);
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final (lightColor, darkColor) = getThemeColors(context);
     return MaterialApp(
       title: 'Expo 🤝 Flutter',
+      themeAnimationDuration: Duration.zero,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
+          seedColor: lightColor,
           brightness: Brightness.light,
         ),
         useMaterial3: true,
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
+          seedColor: darkColor,
           brightness: Brightness.dark,
         ),
         useMaterial3: true,
@@ -90,5 +103,16 @@ class _MyAppState extends State<MyApp> {
       case DemoScreen.dash:
         return DashDemo(text: _text);
     }
+  }
+
+  (Color, Color) getThemeColors(BuildContext context) {
+    final int viewId = View.of(context).viewId;
+    return switch (viewId % 5) {
+      0 => (Colors.blue, Colors.deepPurple),
+      1 => (Colors.indigo, Colors.blueGrey),
+      2 => (Colors.deepOrange, Colors.deepOrange),
+      3 => (Colors.purple, Colors.red),
+      _ => (Colors.green, Colors.yellow),
+    };
   }
 }

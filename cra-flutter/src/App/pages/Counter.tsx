@@ -38,7 +38,7 @@ export const Counter: React.FC<CounterProps> = ({ clicks, onClicksChange }) => {
 
   return (
     <RootContainer>
-      <AppBar position="static" style={{ height: '55px', alignItems: 'center', justifyContent: 'center' }}>
+      <AppBar position="static" style={{ height: '56px', alignItems: 'center', justifyContent: 'center' }}>
         <Typography variant="h6" color="inherit" component="div">
           React Counter
         </Typography>

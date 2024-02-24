@@ -36,7 +36,7 @@
   <script src="flutter.js" defer></script>
 
   <style>
-    html, body { height: 100%; }
+    html, body { height: 100%; margin: 0; }
     body { overflow: hidden; }
   </style>
 </head>
@@ -50,9 +50,12 @@
         },
         onEntrypointLoaded: async function(engineInitializer) {
           // Initialize the Flutter engine
-          let appRunner = await engineInitializer.initializeEngine();
+          const appRunner = await engineInitializer.initializeEngine({
+            multiViewEnabled: true,
+          });
           // Run the app
-          await appRunner.runApp();
+          const flutterApp = await appRunner.runApp();
+          flutterApp.addView({ hostElement: document.querySelector("body") });
         }
       });
     });
