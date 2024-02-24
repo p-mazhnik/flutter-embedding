@@ -26,7 +26,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.10'
+          flutter-version: '3.19'
           cache: true
       - name: React. Install dependencies
         run: npm ci

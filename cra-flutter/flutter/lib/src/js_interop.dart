@@ -4,3 +4,4 @@ library;
 export 'js_interop/counter_state_manager.dart';
 export 'js_interop/helper.dart' show broadcastAppEvent;
 
+export 'dart:js_interop' show createJSInteropWrapper;
