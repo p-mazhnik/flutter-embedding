@@ -64,12 +64,16 @@ export const FlutterView: React.FC<FlutterViewProps> = memo(({
     })
 
     return () => {
+      // cleanup
+
       target?.removeEventListener('flutter-initialized', eventListener)
       const removeView = async () => {
         const viewId = await viewPromise
         console.log(`[React] remove view: ${viewId}`)
         flutterApp.removeView(viewId)
       }
+      // TODO(p-mazhnik): async is unsafe; it is not clear when this function will be invoked
+      //   after component is unmounted (destroyed)
       removeView()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
