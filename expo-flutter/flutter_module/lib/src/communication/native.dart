@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'native_api.g.dart';
 import '../counter_state_manager.dart';
 
-void setupFlutterApi(DemoAppStateManager state) {
+void setupFlutterApi(int viewId, DemoAppStateManager state) {
   final hostApi = HostCounterApi();
   FlutterCounterApi.setup(state);
 

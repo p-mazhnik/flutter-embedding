@@ -16,17 +16,17 @@ class JSDemoAppStateManager extends DemoAppStateManager {
   });
 
   @override
-  void onScreenChanged(Function(String) f) {
+  void onScreenChanged(Function(String)? f) {
     super.onScreenChanged(f);
   }
 
   @override
-  void onTextChanged(Function(String) f) {
+  void onTextChanged(Function(String)? f) {
     super.onTextChanged(f);
   }
 
   @override
-  void onClicksChanged(Function(int) f) {
+  void onClicksChanged(Function(int)? f) {
     super.onClicksChanged(f);
   }
 
@@ -51,10 +51,10 @@ class JSDemoAppStateManager extends DemoAppStateManager {
   }
 }
 
-void setupFlutterApi(DemoAppStateManager state) {
+void setupFlutterApi(int viewId, DemoAppStateManager state) {
   assert(state is JSDemoAppStateManager);
   final export = createJSInteropWrapper(state as JSDemoAppStateManager);
-  broadcastAppEvent('flutter-initialized', export);
+  broadcastAppEvent(viewId, 'flutter-initialized', export);
 }
 
 DemoAppStateManager getStateManager({

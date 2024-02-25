@@ -18,7 +18,7 @@ class _CounterDemoState extends State<CounterDemo> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Counter'),
+        title: const Text('Flutter Counter'),
       ),
       body: Center(
         child: Column(

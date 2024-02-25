@@ -1,10 +1,9 @@
 export interface WebConfig {
-  assetBase?: string;
-  src?: string;
+  flutterApp: any;
 }
 
 export interface FlutterViewProps {
-  webConfig?: WebConfig;
+  webConfig: WebConfig;
 
   onClicksChange?: (clicks: number) => void;
   onScreenChange?: (screen: string) => void;
@@ -14,9 +13,4 @@ export interface FlutterViewProps {
   screen: string;
   clicks: number;
   theme: 'dark' | 'light';
-}
-
-export const defaultWebConfig: WebConfig = {
-  assetBase: '',
-  src: 'main.dart.js',
 }

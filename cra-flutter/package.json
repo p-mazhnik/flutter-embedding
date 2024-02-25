@@ -4,7 +4,7 @@
   "scripts": {
     "prestart": "rimraf node_modules/.cache/",
     "start": "react-scripts start",
-    "prebuild": "cd flutter && flutter clean && flutter build web --base-href $PUBLIC_URL/flutter/ --output=../public/flutter && cd -",
+    "prebuild": "cd flutter && flutter clean && flutter build web --source-maps --profile --dart-define=Dart2jsOptimization=O0 --base-href $PUBLIC_URL/flutter/ --output=../public/flutter && cd -",
     "build": "react-scripts build",
     "test": "react-scripts test"
   },

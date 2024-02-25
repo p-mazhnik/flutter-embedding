@@ -38,6 +38,13 @@
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+  <style>
+    html, body {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
   <script>
@@ -56,7 +63,13 @@
           serviceWorkerVersion: serviceWorkerVersion,
         },
         onEntrypointLoaded: async function(engineInitializer) {
-          await engineInitializer.autoStart();
+          engineInitializer.initializeEngine({
+            multiViewEnabled: true,
+          }).then(function(appRunner) {
+            appRunner.runApp().then(function(flutterApp) {
+              flutterApp.addView({hostElement: document.querySelector("body")});
+            });
+          });
         }
       });
     });
