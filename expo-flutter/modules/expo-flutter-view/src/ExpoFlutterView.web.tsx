@@ -51,7 +51,7 @@ const ExpoFlutterView: React.FC<FlutterViewProps> = memo(({
 
   useEffect(() => {
     const target = ref.current
-    const viewPromise: Promise<number> = flutterApp.addView({ hostElement: target })
+    const viewId: number = flutterApp.addView({ hostElement: target })
 
     const eventListener = (event: Event) => {
       let state = (event as CustomEvent).detail
@@ -64,12 +64,8 @@ const ExpoFlutterView: React.FC<FlutterViewProps> = memo(({
 
     return () => {
       target?.removeEventListener('flutter-initialized', eventListener)
-      const removeView = async () => {
-        const viewId = await viewPromise
-        console.log(`[React] remove view: ${viewId}`)
-        flutterApp.removeView(viewId)
-      }
-      removeView()
+      console.log(`[React] remove view: ${viewId}`)
+      flutterApp.removeView(viewId)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

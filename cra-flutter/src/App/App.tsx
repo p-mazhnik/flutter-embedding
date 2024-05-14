@@ -136,7 +136,7 @@ function App ({ flutterApp }: { flutterApp: any }) {
   return (
     <Box sx={{ display: 'flex', flexGrow: 1 }}>
       <CssBaseline/>
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+      <AppBar position="absolute" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -179,7 +179,7 @@ function App ({ flutterApp }: { flutterApp: any }) {
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box', position: "absolute" },
         }}
       >
         <DrawerHeader/>
