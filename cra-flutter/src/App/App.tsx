@@ -18,6 +18,8 @@ import InputLabel from '@mui/material/InputLabel'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import TextField from '@mui/material/TextField'
 import { FlutterView } from './FlutterView/FlutterView'
+import { ReactView } from './ReactView'
+import { Grid } from '@mui/material'
 
 const drawerWidth = 300
 
@@ -25,6 +27,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean;
 }>(({ theme, open }) => ({
   display: 'flex',
+  flexWrap: 'wrap',
   justifyContent: 'center',
   alignItems: 'center',
   flexGrow: 1,
@@ -32,6 +35,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+  marginTop: '64px',
   marginLeft: `-${drawerWidth}px`,
   ...(open && {
     transition: theme.transitions.create('margin', {
@@ -51,18 +55,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }))
 
-const FlutterAppWrapper = styled('div')(({ theme }) => ({
-  border: '1px solid #eee',
-  borderRadius: '5px',
-  height: '480px',
-  width: '320px',
-  transition: theme.transitions.create('all', {
-    easing: theme.transitions.easing.easeInOut,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflow: 'hidden',
-}))
-
 const EffectButton = ({ title, toggleClassName }: { title: string, toggleClassName: (name: string) => void }) => {
   const onClick = () => {
     toggleClassName(`fx-${title.toLowerCase()}`)
@@ -78,15 +70,44 @@ const EffectButton = ({ title, toggleClassName }: { title: string, toggleClassNa
   )
 }
 
-function App () {
+type ViewType = 'REACT' | 'FLUTTER'
+
+interface View {
+  id: number
+  type: ViewType
+}
+
+function App ({ flutterApp }: { flutterApp: any }) {
   const theme = useTheme()
-  const [drawerOpened, setDrawerOpened] = React.useState(false)
+  const [drawerOpened, setDrawerOpened] = React.useState(true)
   const [classNames, setClassNames] = React.useState('')
   const [screen, setScreen] = React.useState('counter')
   const [clicks, setClicks] = React.useState(0)
   const [text, setText] = React.useState('')
+  const [views, setViews] = React.useState<View[]>([
+    { id: 1, type: 'FLUTTER' },
+    { id: 2, type: 'REACT' },
+    { id: 3, type: 'REACT' },
+    { id: 4, type: 'FLUTTER' }
+  ])
   const handleDrawer = () => {
     setDrawerOpened(!drawerOpened)
+  }
+  const addView = (type: ViewType) => {
+    setViews((flutterViewKeys) => {
+      return [
+        ...flutterViewKeys,
+        {
+          id: (flutterViewKeys[flutterViewKeys.length - 1]?.id ?? 0) + 1,
+          type,
+        }
+      ]
+    })
+  }
+  const removeView = (id: number) => {
+    setViews((flutterViewKeys) => {
+      return flutterViewKeys.filter(k => k.id !== id)
+    })
   }
   const toggleClassName = (className: string) => {
     const classNamesArray = classNames.trim().split(/\s+/)
@@ -115,7 +136,7 @@ function App () {
   return (
     <Box sx={{ display: 'flex', flexGrow: 1 }}>
       <CssBaseline/>
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+      <AppBar position="absolute" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -158,7 +179,7 @@ function App () {
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box', position: "absolute" },
         }}
       >
         <DrawerHeader/>
@@ -213,22 +234,64 @@ function App () {
                 )}
               </FormControl>
             </Box>
+            <Box mt={1} sx={{ display: 'flex', flexGrow: 1, flexWrap: 'wrap', gap: '5px' }}>
+              <Button
+                variant="outlined"
+                onClick={() => addView('FLUTTER')}
+                sx={{ minWidth: '165px' }}
+              >
+                Add Flutter view
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={() => addView('REACT')}
+                sx={{ minWidth: '165px' }}
+              >
+                Add React view
+              </Button>
+            </Box>
           </List>
         </Box>
       </Drawer>
       <Main open={drawerOpened}>
-        <FlutterAppWrapper className={classNames}>
-          <FlutterView
-            assetBase={process.env.PUBLIC_URL + '/flutter/'}
-            src={process.env.PUBLIC_URL + '/flutter/main.dart.js'}
-            onClicksChange={setClicks}
-            onScreenChange={setScreen}
-            onTextChange={setText}
-            text={text}
-            clicks={clicks}
-            screen={screen}
-          />
-        </FlutterAppWrapper>
+        <Grid container spacing={2} sx={{ overflowY: "scroll" }} columns={{ xs: 2 }} justifyContent="center"
+              alignItems="center">
+          {views.map((view) => {
+              let child;
+              if (view.type === 'REACT') {
+                child = (
+                  <ReactView
+                    key={view.id}
+                    className={classNames}
+                    onClicksChange={setClicks}
+                    clicks={clicks}
+                    removeView={() => removeView(view.id)}
+                  />
+                )
+              } else {
+                child = (
+                  <FlutterView
+                    key={view.id}
+                    className={classNames}
+                    flutterApp={flutterApp}
+                    onClicksChange={setClicks}
+                    onScreenChange={setScreen}
+                    onTextChange={setText}
+                    removeView={() => removeView(view.id)}
+                    text={text}
+                    clicks={clicks}
+                    screen={screen}
+                  />
+                )
+              }
+            return (
+              <Grid item key={view.id}>
+                {child}
+              </Grid>
+            )
+            }
+          )}
+        </Grid>
       </Main>
     </Box>
   )

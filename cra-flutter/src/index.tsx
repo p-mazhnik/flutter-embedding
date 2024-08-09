@@ -4,12 +4,29 @@ import './index.css';
 import App from './App/App';
 import reportWebVitals from './reportWebVitals';
 
+// The global _flutter namespace
+declare var _flutter: any
+
+const engineInitializer = await new Promise<any>((resolve) => {
+  console.log('setup Flutter engine initializer...')
+  _flutter.loader.loadEntrypoint({
+    entrypointUrl: process.env.PUBLIC_URL + '/flutter/main.dart.js',
+    onEntrypointLoaded: resolve,
+  })
+})
+const appRunner = await engineInitializer?.initializeEngine({
+  assetBase: process.env.PUBLIC_URL + '/flutter/',
+  multiViewEnabled: true,
+})
+
+const flutterApp = await appRunner.runApp()
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <App flutterApp={flutterApp} />
   </React.StrictMode>
 );
 

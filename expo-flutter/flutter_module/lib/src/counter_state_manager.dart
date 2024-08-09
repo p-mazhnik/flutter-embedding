@@ -70,21 +70,27 @@ class DemoAppStateManager extends FlutterCounterApi {
   }
 
   // Allows clients to subscribe to changes to the wrapped value.
-  void onClicksChanged(Function(int) f) {
+  void onClicksChanged(Function(int)? f) {
     _counter.addListener(() {
-      f(getClicks());
+      if (f != null) {
+        f(getClicks());
+      }
     });
   }
 
-  void onTextChanged(Function(String) f) {
+  void onTextChanged(Function(String)? f) {
     _text.addListener(() {
-      f(getText());
+      if (f != null) {
+        f(getText());
+      }
     });
   }
 
-  void onScreenChanged(Function(String) f) {
+  void onScreenChanged(Function(String)? f) {
     _screen.addListener(() {
-      f(getScreen());
+      if (f != null) {
+        f(getScreen());
+      }
     });
   }
 
