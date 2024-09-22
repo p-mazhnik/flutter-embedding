@@ -83,6 +83,8 @@ const withFlutter: ConfigPlugin = config => {
     const podfile = path.join(config.modRequest.platformProjectRoot, 'Podfile');
     const projectRoot = config.modRequest.projectRoot
 
+    // Inject Flutter pods into the Podfile
+    // TODO(p-mazhnik): to avoid frequent Podfile updates, logic below could be extracted to the custom ruby script
     const pluginsDir = path.join(projectRoot, 'modules/expo-flutter-view/ios/Flutter/plugins');
     const flutterIosPluginPods = []
     flutterIosPluginPods.push('  pod \'Flutter\', :podspec => \'../modules/expo-flutter-view/ios/Flutter/Flutter.podspec\'');
