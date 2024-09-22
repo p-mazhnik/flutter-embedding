@@ -39,7 +39,7 @@ end
 
 target 'ExpoFlutter' do
   use_expo_modules!
-# @generated begin expo-flutter-view - expo prebuild (DO NOT MODIFY) sync-a6fad925eb19db4b427cb412b9bf06f47580494d
+# @generated begin expo-flutter-view - expo prebuild (DO NOT MODIFY) sync-3f30745512310eb21d4d1bf62dd46e7081db1d83
   pod 'Flutter', :podspec => '../modules/expo-flutter-view/ios/Flutter/Flutter.podspec'
   pod 'FlutterPluginRegistrant', path: '../modules/expo-flutter-view/ios/Flutter/plugins/FlutterPluginRegistrant'
   pod 'firebase_analytics', path: '../modules/expo-flutter-view/ios/Flutter/plugins/firebase_analytics/ios'

@@ -72,7 +72,7 @@ const withFlutter = config => {
             const flutterIosPluginPods = [];
             flutterIosPluginPods.push('  pod \'Flutter\', :podspec => \'../modules/expo-flutter-view/ios/Flutter/Flutter.podspec\'');
             flutterIosPluginPods.push(...getFlutterPluginPods(pluginsDir)
-                .map(plugin => `  pod '${plugin.name}', path: '${plugin.path}'`));
+                .map(plugin => `  pod '${plugin.name}', path: '${plugin.path.replace(/.*\/modules\//, '../modules/')}'`));
             flutterIosPluginPods.push('  pod \'FlutterModule-Debug\', ' +
                 ':podspec => \'../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Debug.podspec\', ' +
                 ':configuration => \'Debug\'');
