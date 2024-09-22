@@ -39,6 +39,16 @@ end
 
 target 'ExpoFlutter' do
   use_expo_modules!
+# @generated begin expo-flutter-view - expo prebuild (DO NOT MODIFY) sync-a6fad925eb19db4b427cb412b9bf06f47580494d
+  pod 'Flutter', :podspec => '../modules/expo-flutter-view/ios/Flutter/Flutter.podspec'
+  pod 'FlutterPluginRegistrant', path: '/Users/mazhnik/Codes/p-mazhnik/flutter-embedding/expo-flutter/modules/expo-flutter-view/ios/Flutter/plugins/FlutterPluginRegistrant'
+  pod 'firebase_analytics', path: '/Users/mazhnik/Codes/p-mazhnik/flutter-embedding/expo-flutter/modules/expo-flutter-view/ios/Flutter/plugins/firebase_analytics/ios'
+  pod 'firebase_core', path: '/Users/mazhnik/Codes/p-mazhnik/flutter-embedding/expo-flutter/modules/expo-flutter-view/ios/Flutter/plugins/firebase_core/ios'
+  pod 'FlutterModule-Debug', :podspec => '../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Debug.podspec', :configuration => 'Debug'
+  pod 'FlutterModule-Release', :podspec => '../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Release.podspec', :configuration => 'Release'
+  pod 'GoogleUtilities', :modular_headers => true
+  pod 'FirebaseCore', :modular_headers => true
+# @generated end expo-flutter-view
   config = use_native_modules!
 
   use_frameworks! :linkage => podfile_properties['ios.useFrameworks'].to_sym if podfile_properties['ios.useFrameworks']

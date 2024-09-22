@@ -1,10 +1,10 @@
-import { ConfigPlugin, withProjectBuildGradle } from 'expo/config-plugins';
+import { ConfigPlugin, withProjectBuildGradle, withDangerousMod } from 'expo/config-plugins';
 import {
   createGeneratedHeaderComment,
   MergeResults,
+  mergeContents,
   removeGeneratedContents,
 } from '@expo/config-plugins/build/utils/generateCode';
-import { PluginConfigType } from 'expo-build-properties/src/pluginConfig'
 
 import fs from 'fs'
 import path from 'path'
@@ -78,49 +78,50 @@ const withFlutter: ConfigPlugin = config => {
     }
     return config;
   })
-  // @ts-ignore
-  const projectRoot = config.modRequest.projectRoot
-  const pluginsDir = path.join(projectRoot, 'modules/expo-flutter-view/ios/Flutter/plugins');
-  const flutterIosPods = installFlutterPluginPods(pluginsDir);
 
-  const buildConfig: PluginConfigType = {
-    ios: {
-      extraPods: [
-        ...flutterIosPods,
-        {
-          name: 'FlutterModule-Debug',
-          configurations: ['Debug'],
-          podspec: '../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Debug.podspec'
-        },
-        {
-          name: 'FlutterModule-Release',
-          configurations: ['Release'],
-          podspec: '../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Release.podspec'
-        }
-      ],
+  config = withDangerousMod(config, ['ios', async (config) => {
+    const podfile = path.join(config.modRequest.platformProjectRoot, 'Podfile');
+    const projectRoot = config.modRequest.projectRoot
+
+    const pluginsDir = path.join(projectRoot, 'modules/expo-flutter-view/ios/Flutter/plugins');
+    const flutterIosPluginPods = []
+    flutterIosPluginPods.push('  pod \'Flutter\', :podspec => \'../modules/expo-flutter-view/ios/Flutter/Flutter.podspec\'');
+    flutterIosPluginPods.push(...getFlutterPluginPods(pluginsDir)
+      .map(plugin => `  pod '${plugin.name}', path: '${plugin.path}'`));
+
+    flutterIosPluginPods.push('  pod \'FlutterModule-Debug\', ' +
+      ':podspec => \'../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Debug.podspec\', ' +
+      ':configuration => \'Debug\'')
+    flutterIosPluginPods.push('  pod \'FlutterModule-Release\', ' +
+      ':podspec => \'../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Release.podspec\', ' +
+      ':configuration => \'Release\'')
+
+    // some specific dependencies could require modular_headers set to true
+    flutterIosPluginPods.push('  pod \'GoogleUtilities\', :modular_headers => true')
+    flutterIosPluginPods.push('  pod \'FirebaseCore\', :modular_headers => true')
+
+    const contents = await fs.promises.readFile(podfile, 'utf8');
+
+    const result = mergeContents({
+      tag: 'expo-flutter-view',
+      src: contents,
+      newSrc: flutterIosPluginPods.join('\n'),
+      anchor: /use_native_modules/,
+      offset: 0,
+      comment: '#',
+    });
+
+    if (result.didMerge || result.didClear) {
+      await fs.promises.writeFile(podfile, result.contents);
     }
-  }
 
-  // config = withBuildProperties(config, buildConfig)
-
-  if (!config.plugins) {
-    config.plugins = []
-  }
-
-  config.plugins = [
-    ...config.plugins,
-    [
-      "expo-build-properties",
-      buildConfig
-    ]
-  ]
-
-  config.ios
+    return config;
+  }])
 
   return config
 };
 
-function installFlutterPluginPods(pluginsDir: string) {
+function getFlutterPluginPods(pluginsDir: string) {
   if (!fs.existsSync(pluginsDir)) {
     throw new Error(`${pluginsDir} must exist.`);
   }

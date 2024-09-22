@@ -10,6 +10,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'
+  s.dependency 'Flutter'
   s.dependency "FlutterModule-Debug"
   s.dependency "FlutterModule-Release"
 
@@ -20,4 +21,5 @@ Pod::Spec.new do |s|
   }
 
   s.source_files = "**/*.{h,m,mm,swift,hpp,cpp}"
+  s.exclude_files = "Flutter/"
 end
