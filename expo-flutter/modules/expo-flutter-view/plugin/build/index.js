@@ -1,8 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addFlutterImport = void 0;
 const config_plugins_1 = require("expo/config-plugins");
 const generateCode_1 = require("@expo/config-plugins/build/utils/generateCode");
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 const gradleMaven = [
     `
 allprojects {
@@ -60,9 +65,14 @@ const withFlutter = config => {
         }
         return config;
     });
+    // @ts-ignore
+    const projectRoot = config.modRequest.projectRoot;
+    const pluginsDir = path_1.default.join(projectRoot, 'modules/expo-flutter-view/ios/Flutter/plugins');
+    const flutterIosPods = installFlutterPluginPods(pluginsDir);
     const buildConfig = {
         ios: {
             extraPods: [
+                ...flutterIosPods,
                 {
                     name: 'FlutterModule-Debug',
                     configurations: ['Debug'],
@@ -90,4 +100,34 @@ const withFlutter = config => {
     config.ios;
     return config;
 };
+function installFlutterPluginPods(pluginsDir) {
+    if (!fs_1.default.existsSync(pluginsDir)) {
+        throw new Error(`${pluginsDir} must exist.`);
+    }
+    // Find all podspec files and process them
+    const pluginPodspecPaths = getFilesRecursive(pluginsDir, '.podspec');
+    return pluginPodspecPaths.map(pluginPodspecPath => {
+        const pluginPath = path_1.default.dirname(pluginPodspecPath);
+        const pluginName = path_1.default.basename(pluginPodspecPath, '.podspec');
+        return {
+            name: pluginName,
+            path: pluginPath
+        };
+    });
+}
+// Helper function to get all files recursively with a specific extension
+function getFilesRecursive(dir, extension) {
+    let results = [];
+    fs_1.default.readdirSync(dir).forEach(file => {
+        const fullPath = path_1.default.join(dir, file);
+        const stat = fs_1.default.statSync(fullPath);
+        if (stat.isDirectory()) {
+            results = results.concat(getFilesRecursive(fullPath, extension));
+        }
+        else if (fullPath.endsWith(extension)) {
+            results.push(fullPath);
+        }
+    });
+    return results;
+}
 exports.default = withFlutter;

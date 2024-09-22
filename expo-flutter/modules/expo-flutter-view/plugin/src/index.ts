@@ -6,6 +6,9 @@ import {
 } from '@expo/config-plugins/build/utils/generateCode';
 import { PluginConfigType } from 'expo-build-properties/src/pluginConfig'
 
+import fs from 'fs'
+import path from 'path'
+
 const gradleMaven = [
 `
 allprojects {
@@ -75,10 +78,15 @@ const withFlutter: ConfigPlugin = config => {
     }
     return config;
   })
+  // @ts-ignore
+  const projectRoot = config.modRequest.projectRoot
+  const pluginsDir = path.join(projectRoot, 'modules/expo-flutter-view/ios/Flutter/plugins');
+  const flutterIosPods = installFlutterPluginPods(pluginsDir);
 
   const buildConfig: PluginConfigType = {
     ios: {
       extraPods: [
+        ...flutterIosPods,
         {
           name: 'FlutterModule-Debug',
           configurations: ['Debug'],
@@ -111,5 +119,42 @@ const withFlutter: ConfigPlugin = config => {
 
   return config
 };
+
+function installFlutterPluginPods(pluginsDir: string) {
+  if (!fs.existsSync(pluginsDir)) {
+    throw new Error(`${pluginsDir} must exist.`);
+  }
+
+  // Find all podspec files and process them
+  const pluginPodspecPaths = getFilesRecursive(pluginsDir, '.podspec');
+
+  return pluginPodspecPaths.map(pluginPodspecPath => {
+    const pluginPath = path.dirname(pluginPodspecPath);
+    const pluginName = path.basename(pluginPodspecPath, '.podspec');
+
+    return {
+      name: pluginName,
+      path: pluginPath
+    }
+  });
+}
+
+// Helper function to get all files recursively with a specific extension
+function getFilesRecursive(dir: string, extension: string) {
+  let results: string[] = [];
+
+  fs.readdirSync(dir).forEach(file => {
+    const fullPath = path.join(dir, file);
+    const stat = fs.statSync(fullPath);
+
+    if (stat.isDirectory()) {
+      results = results.concat(getFilesRecursive(fullPath, extension));
+    } else if (fullPath.endsWith(extension)) {
+      results.push(fullPath);
+    }
+  });
+
+  return results;
+}
 
 export default withFlutter;

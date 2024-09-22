@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -271,15 +271,33 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ExpoFlutter/Pods-ExpoFlutter-frameworks.sh",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Debug/App.framework/App",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Debug/FBLPromises.framework/FBLPromises",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Debug/FirebaseCore.framework/FirebaseCore",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Debug/FirebaseCoreInternal.framework/FirebaseCoreInternal",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Debug/FirebaseInstallations.framework/FirebaseInstallations",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Debug/Flutter.framework/Flutter",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Debug/GoogleUtilities.framework/GoogleUtilities",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Debug/nanopb.framework/nanopb",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Release/App.framework/App",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Release/FBLPromises.framework/FBLPromises",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Release/FirebaseCore.framework/FirebaseCore",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Release/FirebaseCoreInternal.framework/FirebaseCoreInternal",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Release/FirebaseInstallations.framework/FirebaseInstallations",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Release/Flutter.framework/Flutter",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Release/GoogleUtilities.framework/GoogleUtilities",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FlutterModule-Release/nanopb.framework/nanopb",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/App.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreInternal.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Flutter.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,7 +375,10 @@
 				);
 				INFOPLIST_FILE = ExpoFlutter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -385,7 +406,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = ExpoFlutter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -450,8 +474,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -503,8 +530,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = "$(inherited)";

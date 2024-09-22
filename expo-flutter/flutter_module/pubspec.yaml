@@ -10,6 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   web: ^1.0.0
+  # add some dependencies with native code
+  firebase_core: 3.5.0
+  firebase_analytics: 11.3.2
 
 dev_dependencies:
   flutter_test:

@@ -35,8 +35,8 @@ PODS:
     - React-Core (= 0.72.3)
     - React-jsi (= 0.72.3)
     - ReactCommon/turbomodule/core (= 0.72.3)
-  - FlutterModule-Debug (1.0.0)
-  - FlutterModule-Release (1.0.0)
+  - FlutterModule-Debug (1.0.1)
+  - FlutterModule-Release (1.0.1)
   - fmt (6.2.1)
   - glog (0.3.5)
   - hermes-engine (0.72.3):
@@ -643,8 +643,8 @@ SPEC CHECKSUMS:
   EXSplashScreen: 89586b0961acd173b04713b7457949b063a659da
   FBLazyVector: 4cce221dd782d3ff7c4172167bba09d58af67ccb
   FBReactNativeSpec: c6bd9e179757b3c0ecf815864fae8032377903ef
-  FlutterModule-Debug: f92e5f2f5ac68eeb946dbc1a0a3a76da4273c715
-  FlutterModule-Release: df83085924b37e0295cdd589d24be2eb846e85fd
+  FlutterModule-Debug: 543b9c8ffdb47298485d210b9cb87b6ad96eeab4
+  FlutterModule-Release: a96a56fcf1762de0c67900099adf15165517676b
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 10fbd3f62405c41ea07e71973ea61e1878d07322
@@ -688,4 +688,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 67e5024182d2f86a9b22f9a0ec4e3f311988f702
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.14.3
