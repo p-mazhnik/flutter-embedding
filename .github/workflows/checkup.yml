@@ -45,11 +45,16 @@ jobs:
         working-directory: expo-flutter/ios
         run: pod install
 
+      - run: |
+          xed --version
+          xcodebuild -workspace ExpoFlutter.xcworkspace -list
+        working-directory: expo-flutter/ios
+
       - name: Build Expo iOS app
         working-directory: expo-flutter/ios
         run: |
           xcodebuild archive -workspace ExpoFlutter.xcworkspace \
-          -scheme ExpoFlutter \
+          -scheme expoflutter \
           -sdk iphoneos \
           -configuration Debug \
           -destination generic/platform=iOS \
