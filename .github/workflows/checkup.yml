@@ -29,6 +29,14 @@ jobs:
       - run: npm install
         working-directory: expo-flutter
 
+      - run: flutter pub get
+        working-directory: expo-flutter/flutter_module
+
+      - name: Update Deployment Target
+        run: |
+          sed -i '' "s/platform :ios, '12.0'/platform :ios, '15.0'/g" .ios/Podfile
+        working-directory: expo-flutter/flutter_module
+
       - name: Build Flutter iOS artifacts
         run: npm run flutter:build:ios
         working-directory: expo-flutter
