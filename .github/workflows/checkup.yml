@@ -1,0 +1,62 @@
+name: Checkup
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  expo-ios-build:
+    name: Build Expo ios app
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24'
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - run: npm install
+        working-directory: expo-flutter
+
+      - run: flutter pub get
+        working-directory: expo-flutter/flutter_module
+
+      - name: Update Deployment Target
+        run: |
+          sed -i '' "s/platform :ios, '12.0'/platform :ios, '15.0'/g" .ios/Podfile
+        working-directory: expo-flutter/flutter_module
+
+      - name: Build Flutter iOS artifacts
+        run: npm run flutter:build:ios
+        working-directory: expo-flutter
+
+      - name: Install Cocoapods dependencies
+        working-directory: expo-flutter/ios
+        run: pod install
+
+      - run: |
+          xed --version
+          xcodebuild -workspace ExpoFlutter.xcworkspace -list
+        working-directory: expo-flutter/ios
+
+      - name: Build Expo iOS app
+        working-directory: expo-flutter/ios
+        run: |
+          xcodebuild archive -workspace ExpoFlutter.xcworkspace \
+          -scheme expoflutter \
+          -sdk iphoneos \
+          -configuration Debug \
+          -destination generic/platform=iOS \
+          -archivePath archive/ExpoFlutter.xcarchive \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO

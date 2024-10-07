@@ -1,8 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addFlutterImport = void 0;
 const config_plugins_1 = require("expo/config-plugins");
 const generateCode_1 = require("@expo/config-plugins/build/utils/generateCode");
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 const gradleMaven = [
     `
 allprojects {
@@ -60,34 +65,67 @@ const withFlutter = config => {
         }
         return config;
     });
-    const buildConfig = {
-        ios: {
-            extraPods: [
-                {
-                    name: 'FlutterModule-Debug',
-                    configurations: ['Debug'],
-                    podspec: '../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Debug.podspec'
-                },
-                {
-                    name: 'FlutterModule-Release',
-                    configurations: ['Release'],
-                    podspec: '../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Release.podspec'
-                }
-            ],
-        }
-    };
-    // config = withBuildProperties(config, buildConfig)
-    if (!config.plugins) {
-        config.plugins = [];
-    }
-    config.plugins = [
-        ...config.plugins,
-        [
-            "expo-build-properties",
-            buildConfig
-        ]
-    ];
-    config.ios;
+    config = (0, config_plugins_1.withDangerousMod)(config, ['ios', async (config) => {
+            const podfile = path_1.default.join(config.modRequest.platformProjectRoot, 'Podfile');
+            const projectRoot = config.modRequest.projectRoot;
+            const pluginsDir = path_1.default.join(projectRoot, 'modules/expo-flutter-view/ios/Flutter/plugins');
+            const flutterIosPluginPods = [];
+            flutterIosPluginPods.push('  pod \'Flutter\', :podspec => \'../modules/expo-flutter-view/ios/Flutter/Flutter.podspec\'');
+            flutterIosPluginPods.push(...getFlutterPluginPods(pluginsDir)
+                .map(plugin => `  pod '${plugin.name}', path: '${plugin.path.replace(/.*\/modules\//, '../modules/')}'`));
+            flutterIosPluginPods.push('  pod \'FlutterModule-Debug\', ' +
+                ':podspec => \'../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Debug.podspec\', ' +
+                ':configuration => \'Debug\'');
+            flutterIosPluginPods.push('  pod \'FlutterModule-Release\', ' +
+                ':podspec => \'../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Release.podspec\', ' +
+                ':configuration => \'Release\'');
+            // some specific dependencies could require modular_headers set to true
+            flutterIosPluginPods.push('  pod \'GoogleUtilities\', :modular_headers => true');
+            flutterIosPluginPods.push('  pod \'FirebaseCore\', :modular_headers => true');
+            const contents = await fs_1.default.promises.readFile(podfile, 'utf8');
+            const result = (0, generateCode_1.mergeContents)({
+                tag: 'expo-flutter-view',
+                src: contents,
+                newSrc: flutterIosPluginPods.join('\n'),
+                anchor: /use_native_modules/,
+                offset: 0,
+                comment: '#',
+            });
+            if (result.didMerge || result.didClear) {
+                await fs_1.default.promises.writeFile(podfile, result.contents);
+            }
+            return config;
+        }]);
     return config;
 };
+function getFlutterPluginPods(pluginsDir) {
+    if (!fs_1.default.existsSync(pluginsDir)) {
+        throw new Error(`${pluginsDir} must exist.`);
+    }
+    // Find all podspec files and process them
+    const pluginPodspecPaths = getFilesRecursive(pluginsDir, '.podspec');
+    return pluginPodspecPaths.map(pluginPodspecPath => {
+        const pluginPath = path_1.default.dirname(pluginPodspecPath);
+        const pluginName = path_1.default.basename(pluginPodspecPath, '.podspec');
+        return {
+            name: pluginName,
+            path: pluginPath
+        };
+    });
+}
+// Helper function to get all files recursively with a specific extension
+function getFilesRecursive(dir, extension) {
+    let results = [];
+    fs_1.default.readdirSync(dir).forEach(file => {
+        const fullPath = path_1.default.join(dir, file);
+        const stat = fs_1.default.statSync(fullPath);
+        if (stat.isDirectory()) {
+            results = results.concat(getFilesRecursive(fullPath, extension));
+        }
+        else if (fullPath.endsWith(extension)) {
+            results.push(fullPath);
+        }
+    });
+    return results;
+}
 exports.default = withFlutter;

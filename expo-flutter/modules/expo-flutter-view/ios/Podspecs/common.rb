@@ -1,7 +1,7 @@
 require 'json'
 
 def setCommonProps(s)
-  s.version        = '1.0.0'
+  s.version        = '1.2.0'
   s.summary        = 'Summary'
   s.description    = 'Description'
   s.author         = ''

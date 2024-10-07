@@ -7,7 +7,7 @@ podfile_properties = JSON.parse(File.read(File.join(__dir__, 'Podfile.properties
 ENV['RCT_NEW_ARCH_ENABLED'] = podfile_properties['newArchEnabled'] == 'true' ? '1' : '0'
 ENV['EX_DEV_CLIENT_NETWORK_INSPECTOR'] = podfile_properties['EX_DEV_CLIENT_NETWORK_INSPECTOR']
 
-platform :ios, podfile_properties['ios.deploymentTarget'] || '13.0'
+platform :ios, podfile_properties['ios.deploymentTarget'] || '15.0'
 install! 'cocoapods',
   :deterministic_uuids => false
 
@@ -39,6 +39,16 @@ end
 
 target 'ExpoFlutter' do
   use_expo_modules!
+# @generated begin expo-flutter-view - expo prebuild (DO NOT MODIFY) sync-3f30745512310eb21d4d1bf62dd46e7081db1d83
+  pod 'Flutter', :podspec => '../modules/expo-flutter-view/ios/Flutter/Flutter.podspec'
+  pod 'FlutterPluginRegistrant', path: '../modules/expo-flutter-view/ios/Flutter/plugins/FlutterPluginRegistrant'
+  pod 'firebase_analytics', path: '../modules/expo-flutter-view/ios/Flutter/plugins/firebase_analytics/ios'
+  pod 'firebase_core', path: '../modules/expo-flutter-view/ios/Flutter/plugins/firebase_core/ios'
+  pod 'FlutterModule-Debug', :podspec => '../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Debug.podspec', :configuration => 'Debug'
+  pod 'FlutterModule-Release', :podspec => '../modules/expo-flutter-view/ios/Podspecs/FlutterModule-Release.podspec', :configuration => 'Release'
+  pod 'GoogleUtilities', :modular_headers => true
+  pod 'FirebaseCore', :modular_headers => true
+# @generated end expo-flutter-view
   config = use_native_modules!
 
   use_frameworks! :linkage => podfile_properties['ios.useFrameworks'].to_sym if podfile_properties['ios.useFrameworks']
