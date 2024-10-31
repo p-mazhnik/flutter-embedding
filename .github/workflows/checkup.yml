@@ -43,7 +43,7 @@ jobs:
 
       - name: Install Cocoapods dependencies
         working-directory: expo-flutter/ios
-        run: pod install
+        run: pod update Flutter && pod install
 
       - run: |
           xed --version
